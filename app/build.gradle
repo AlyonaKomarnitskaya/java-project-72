@@ -6,6 +6,7 @@ plugins {
     id 'com.github.ben-manes.versions' version '0.42.0'
     id 'io.ebean' version '12.15.1'
     id 'jacoco'
+    id('idea')
 }
 
 group 'hexlet.code'
@@ -51,6 +52,7 @@ dependencies {
     testImplementation 'io.ebean:ebean-test:13.6.3'
     testImplementation 'com.konghq:unirest-java:3.13.10'
     testImplementation 'com.squareup.okhttp3:mockwebserver:4.10.0'
+
 }
 
 test {
