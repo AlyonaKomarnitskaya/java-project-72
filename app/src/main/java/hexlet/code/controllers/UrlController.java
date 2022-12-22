@@ -1,6 +1,7 @@
 package hexlet.code.controllers;
 
 import hexlet.code.domain.Url;
+import hexlet.code.domain.UrlCheck;
 import io.ebean.PagedList;
 import io.javalin.http.Handler;
 import io.javalin.http.NotFoundResponse;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import hexlet.code.domain.query.QUrl;
+import hexlet.code.domain.query.QUrlCheck;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
@@ -91,5 +93,43 @@ public class UrlController {
 
         ctx.attribute("url", url);
         ctx.render("urls/show.html");
+    };
+
+    public static Handler checkUrl = ctx -> {
+        long id = ctx.pathParamAsClass("id", Long.class).getOrDefault(null);
+
+        Url url = new QUrl()
+                .id.equalTo(id)
+                .findOne();
+
+        HttpResponse<String> response;
+
+        try {
+            response = Unirest.get(url.getName()).asString();
+
+            int statusCode = response.getStatus();
+
+            Document body = Jsoup.parse(response.getBody());
+
+            String title = body.title();
+
+            String description = Optional.ofNullable(body.selectFirst("meta[name=description][content]"))
+                    .map(value -> value.attr("content"))
+                    .orElse("");
+
+            String h1 = Optional.ofNullable(body.selectFirst("h1"))
+                    .map(value -> value.text())
+                    .orElse("");
+
+            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, url);
+            urlCheck.save();
+
+            ctx.sessionAttribute("flash", "Страница успешно проверена");
+            ctx.sessionAttribute("flash-type", "success");
+        } catch (UnirestException e) {
+            ctx.sessionAttribute("flash", "Страница недоступна");
+            ctx.sessionAttribute("flash-type", "danger");
+        }
+        ctx.redirect("/urls/" + id);
     };
 }

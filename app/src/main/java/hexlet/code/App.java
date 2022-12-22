@@ -1,5 +1,7 @@
 package hexlet.code;
 
+import hexlet.code.controllers.RootController;
+import hexlet.code.controllers.UrlController;
 import io.javalin.Javalin;
 import io.javalin.plugin.rendering.template.JavalinThymeleaf;
 import static io.javalin.apibuilder.ApiBuilder.path;
@@ -33,26 +35,28 @@ public final class App {
     }
 
     private static void addRoutes(Javalin app) {
-        app = Javalin.create(/*config*/)
-                .get("/", ctx -> ctx.result("Hello World"))
-                .start();
+        app.get("/", RootController.welcome);
+        app.routes(() -> {
+            path("urls", () -> {
+                get(UrlController.listURLs);
+                post(UrlController.createUrl);
+                path("{id}", () -> {
+                    get(UrlController.showUrl);
+                    post("/checks", UrlController.checkUrl);
+                });
+            });
+        });
     }
 
     public static Javalin getApp() {
-
-        // Создаём приложение
         Javalin app = Javalin.create(config -> {
-            // Включаем логгирование
             config.enableDevLogging();
-            // Подключаем настроенный шаблонизатор к фреймворку
+            config.enableWebjars();
             JavalinThymeleaf.configure(getTemplateEngine());
         });
 
-        // Добавляем маршруты в приложение
         addRoutes(app);
 
-        // Обработчик before запускается перед каждым запросом
-        // Устанавливаем атрибут ctx для запросов
         app.before(ctx -> {
             ctx.attribute("ctx", ctx);
         });
