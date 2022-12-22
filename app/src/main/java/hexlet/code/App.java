@@ -48,6 +48,7 @@ public final class App {
         });
     }
 
+
     public static Javalin getApp() {
         Javalin app = Javalin.create(config -> {
             config.enableDevLogging();

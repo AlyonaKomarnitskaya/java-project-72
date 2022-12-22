@@ -4,7 +4,7 @@ plugins {
     id 'checkstyle'
     id 'com.adarshr.test-logger' version '3.2.0'
     id 'com.github.ben-manes.versions' version '0.42.0'
-    id 'io.ebean' version '12.15.1'
+    id 'io.ebean' version '13.6.3'
     id 'jacoco'
     id('idea')
 }

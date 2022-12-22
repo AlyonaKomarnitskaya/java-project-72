@@ -11,7 +11,6 @@ import java.util.List;
 import io.ebean.annotation.WhenCreated;
 
 @Entity
-
 public final class Url extends Model {
 
     @Id
