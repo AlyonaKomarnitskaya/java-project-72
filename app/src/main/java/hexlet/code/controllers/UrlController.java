@@ -62,18 +62,18 @@ public class UrlController {
                     .exists();
 
             if (urlExist) {
-                ctx.sessionAttribute("flash", "Страница уже существует");
+                ctx.sessionAttribute("flash", "Page already exists");
                 ctx.sessionAttribute("flash-type", "danger");
                 ctx.attribute("url", urlString);
                 ctx.redirect("/");
             } else {
                 new Url(normalizedUrl).save();
-                ctx.sessionAttribute("flash", "Страница успешно добавлена");
+                ctx.sessionAttribute("flash", "Page added successfully");
                 ctx.sessionAttribute("flash-type", "success");
                 ctx.redirect("/urls");
             }
         } catch (MalformedURLException e) {
-            ctx.sessionAttribute("flash", "Некорректный URL");
+            ctx.sessionAttribute("flash", "Incorrect URL");
             ctx.sessionAttribute("flash-type", "danger");
             ctx.render("index.html");
             return;
@@ -130,10 +130,10 @@ public class UrlController {
             UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, url);
             urlCheck.save();
 
-            ctx.sessionAttribute("flash", "Страница успешно проверена");
+            ctx.sessionAttribute("flash", "Page checked successfully");
             ctx.sessionAttribute("flash-type", "success");
         } catch (UnirestException e) {
-            ctx.sessionAttribute("flash", "Страница недоступна");
+            ctx.sessionAttribute("flash", "Page is not available");
             ctx.sessionAttribute("flash-type", "danger");
         }
         ctx.redirect("/urls/" + id);
