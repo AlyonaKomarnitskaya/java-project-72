@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import hexlet.code.domain.query.QUrl;
-import hexlet.code.domain.query.QUrlCheck;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
@@ -91,6 +90,12 @@ public class UrlController {
             throw new NotFoundResponse();
         }
 
+        List<UrlCheck> urlChecks = new QUrlCheck()
+                .url.equalTo(url)
+                .orderBy().id.desc()
+                .findList();
+
+        ctx.attribute("urlChecks", urlChecks);
         ctx.attribute("url", url);
         ctx.render("urls/show.html");
     };
