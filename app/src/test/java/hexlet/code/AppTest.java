@@ -51,12 +51,12 @@ public class AppTest {
     }
 
     @BeforeEach
-    void beforeEach() {
+    final void beforeEach() {
         transaction = DB.beginTransaction();
     }
 
     @AfterEach
-    void afterEach() {
+    final void afterEach() {
         transaction.rollback();
     }
 
