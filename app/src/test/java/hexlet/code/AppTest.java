@@ -41,7 +41,7 @@ public class AppTest {
         app.start(0);
         int port = app.port();
         baseUrl = "http://localhost:" + port;
-        existingUrl = new Url("https://github.com");
+        existingUrl = new Url("https://youtube.com");
         existingUrl.save();
     }
 
@@ -101,7 +101,7 @@ public class AppTest {
 
     @Test
     void testCreateUrl() {
-        String inputName = "https://github.com";
+        String inputName = "https://youtube.com";
         HttpResponse<String> responsePost = Unirest
                 .post(baseUrl + "/urls")
                 .field("url", inputName)
