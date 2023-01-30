@@ -4,3 +4,4 @@
 /app/.gradle
 .idea
 .idea/
+*.db
