@@ -9,7 +9,9 @@
 
 https://java-project-72-production-0f7a.up.railway.app/ – a website that analyzes websites for SEO suitability.
 
-### In case if you want to test it locally:
+---
+
+### In case you want to test it locally:
 
 
 ## Setup
