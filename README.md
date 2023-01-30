@@ -5,10 +5,10 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d62459a1f6efb71334d3/maintainability)](https://codeclimate.com/github/LenaKomarnitskaya/java-project-72/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/d62459a1f6efb71334d3/test_coverage)](https://codeclimate.com/github/LenaKomarnitskaya/java-project-72/test_coverage)
 
-## Link
-```
+## Page analyzer
+
 https://java-project-72-production-0f7a.up.railway.app/ – a website that analyzes websites for SEO suitability.
-```
+
 ### In case if you want to test it locally:
 
 
