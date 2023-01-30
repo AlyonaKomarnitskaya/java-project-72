@@ -7,7 +7,7 @@
 
 ## Page analyzer
 
-https://java-project-72-production-0f7a.up.railway.app/ – a website that analyzes websites for SEO suitability.
+https://java-project-72-eiz0.onrender.com – a website that analyzes websites for SEO suitability.
 
 ---
 
